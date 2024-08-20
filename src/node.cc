@@ -29,11 +29,10 @@ std::vector<std::shared_ptr<Node>> populate_nodes_randomly(int node_count, int e
 	std::unordered_set<std::pair<int, int>, pairHash<int, int>> edges;
   while (edges.size() < edge_count) {
 		auto [a, b] = generate_random_pair(nodes.size());
-		auto edge = std::make_pair(std::min(a, b), std::max(a, b));
+		auto edge = std::make_pair(a, b);
 		if(edges.count(edge)) continue;
 
 		nodes[a]->m_neighbors.insert(nodes[b]);
-		nodes[b]->m_neighbors.insert(nodes[a]);
 		edges.insert(edge);
   }
 	return nodes;

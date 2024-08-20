@@ -8,7 +8,7 @@
 
 
 int main() {
-  auto nodes = populate_nodes_randomly(23, 20);
+  auto nodes = populate_nodes_randomly(23, 30);
 
   for(auto n: nodes){
     std::cout << n.use_count() << " refs ->\t" << *n << "\n";
