@@ -1,5 +1,3 @@
-#pragma once
-
 #include <algorithm>
 #include <iostream>
 #include <memory>
@@ -10,12 +8,10 @@
 
 
 int main() {
-  std::vector<std::shared_ptr<Node>> nodes;
-  populate_nodes_randomly(nodes, 23, 8);
+  auto nodes = populate_nodes_randomly(23, 20);
 
   for(auto n: nodes){
     std::cout << n.use_count() << " refs ->\t" << *n << "\n";
-
   }
   return 0;
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "node.hh"
+#include "util.cc"
 #include <memory>
 #include <iostream>
 #include <unordered_set>
@@ -19,25 +20,21 @@ std::ostream& operator<<(std::ostream& os, const Node& n) {
     return os;
 }
 
-void populate_nodes_randomly(std::vector<std::shared_ptr<Node>> &nodes, int node_count, int max_neighbors) {
+std::vector<std::shared_ptr<Node>> populate_nodes_randomly(int node_count, int edge_count) {
+	std::vector<std::shared_ptr<Node>> nodes;
   for (auto i = 0; i < node_count; i += 1) {
     nodes.push_back(std::make_shared<Node>(i));
   }
 
-  for (auto i = 0; i < nodes.size(); i++) {
-    auto n_count = rand() % max_neighbors;
-    std::vector<int> possible;
-    for (auto j = 0; j < nodes.size(); j++) {
-      if (i != j)
-        possible.push_back(j);
-    }
+	std::unordered_set<std::pair<int, int>, pairHash<int, int>> edges;
+  while (edges.size() < edge_count) {
+		auto [a, b] = generate_random_pair(nodes.size());
+		auto edge = std::make_pair(std::min(a, b), std::max(a, b));
+		if(edges.count(edge)) continue;
 
-    for (auto j = 0; j < n_count; j++) {
-      auto chosen_idx = rand() % possible.size();
-      std::swap(possible[chosen_idx], possible.back());
-      nodes[i]->m_neighbors.emplace(nodes[possible.back()]);
-
-      possible.pop_back();
-    }
+		nodes[a]->m_neighbors.insert(nodes[b]);
+		nodes[b]->m_neighbors.insert(nodes[a]);
+		edges.insert(edge);
   }
+	return nodes;
 }
