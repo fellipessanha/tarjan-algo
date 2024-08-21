@@ -12,5 +12,5 @@ public:
 
   Node(int v);
 
-  friend std::ostream &operator<<(std::ostream &os, const Node &n);
+  friend std::ostream& operator<<(std::ostream& os, const Node& n);
 };
