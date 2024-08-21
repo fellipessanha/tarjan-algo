@@ -4,7 +4,7 @@
 #include <unordered_set>
 #include <vector>
 #include "node.hh"
-#include "node.cc"
+#include "graph.cc"
 
 
 int main() {
