@@ -11,6 +11,8 @@ set(SOURCES
     src/util.cc
 )
 
+set(DCMAKE_EXPORT_COMPILE_COMMANDS=1)
+
 add_executable(tarjan-algo.out ${SOURCES})
 
 target_include_directories(tarjan-algo.out PRIVATE ${PROJECT_SOURCE_DIR}/include)
