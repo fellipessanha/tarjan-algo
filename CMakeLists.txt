@@ -11,7 +11,7 @@ set(SOURCES
     src/util.cc
 )
 
-set(DCMAKE_EXPORT_COMPILE_COMMANDS=1)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_executable(tarjan-algo.out ${SOURCES})
 
