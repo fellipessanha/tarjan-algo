@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <unordered_set>
+
 class Node {
 public:
   int m_val;
@@ -11,5 +12,5 @@ public:
 
   Node(int v);
 
-  friend std::ostream& operator<<(std::ostream& os, const Node& n);
+  friend std::ostream &operator<<(std::ostream &os, const Node &n);
 };

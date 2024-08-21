@@ -3,9 +3,9 @@
 #include <memory>
 #include <unordered_set>
 #include <vector>
+
+#include "graph.hh"
 #include "node.hh"
-#include "node.cc"
-#include "graph.cc"
 
 void output_edges(std::vector<std::shared_ptr<Node>> &nodes) {
   for (auto [a, b] : draw_edges(nodes)) {
@@ -20,9 +20,9 @@ void output_nodes(std::vector<std::shared_ptr<Node>> &nodes) {
 
 int main() {
   auto nodes = populate_nodes_randomly(23, 30);
-  
+
   output_edges(nodes);
   output_nodes(nodes);
-  
+
   return 0;
 }
