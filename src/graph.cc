@@ -1,3 +1,4 @@
+#pragma once 
 
 #include "node.hh"
 #include "util.cc"
@@ -19,4 +20,15 @@ std::vector<std::shared_ptr<Node>> populate_nodes_randomly(int node_count, int e
 		edges.insert(edge);
   }
 	return nodes;
+}
+
+std::vector<std::pair<std::shared_ptr<Node>, std::shared_ptr<Node>>>
+draw_edges(std::vector<std::shared_ptr<Node>> nodes){
+    std::vector<std::pair<std::shared_ptr<Node>, std::shared_ptr<Node>>> edges;
+    for(auto n: nodes){
+        for(auto v: n->m_neighbors){
+            edges.push_back({n, v});
+        }
+    }
+    return edges;
 }
