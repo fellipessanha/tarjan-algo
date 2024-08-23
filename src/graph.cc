@@ -38,3 +38,18 @@ draw_edges(std::vector<std::shared_ptr<Node>> nodes) {
   }
   return edges;
 }
+
+std::vector<std::shared_ptr<Node>>
+generate_simple_cycled_graph() {
+  std::vector<std::shared_ptr<Node>> ans;
+
+  for (auto i = 0; i < 4; i++) {
+    ans.push_back(std::make_shared<Node>(i));
+  }
+
+  for (auto i = 0; i < 3; i++) {
+    ans[i]->m_neighbors.insert(ans[(i + 1) % 3]);
+  }
+
+  return ans;
+}
