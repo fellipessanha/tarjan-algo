@@ -5,7 +5,7 @@
 #include <unordered_set>
 #include <vector>
 
-Node::Node(int v, std::unordered_set<std::shared_ptr<Node>> neighbors)
+Node::Node(int v, std::vector<std::shared_ptr<Node>> neighbors)
   : m_val(v)
   , m_neighbors(neighbors){};
 

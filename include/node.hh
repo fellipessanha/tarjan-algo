@@ -1,14 +1,14 @@
 #pragma once
 
 #include <memory>
-#include <unordered_set>
+#include <vector>
 
 class Node {
 public:
   int m_val;
-  std::unordered_set<std::shared_ptr<Node>> m_neighbors;
+  std::vector<std::shared_ptr<Node>> m_neighbors;
 
-  Node(int v, std::unordered_set<std::shared_ptr<Node>> neighbors);
+  Node(int v, std::vector<std::shared_ptr<Node>> neighbors);
 
   Node(int v);
 

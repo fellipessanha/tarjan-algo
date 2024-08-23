@@ -64,8 +64,8 @@ find_strongly_connected_components(std::vector<std::shared_ptr<Node>> nodes) {
       // repetition portion: we either iterate on a neighbor of n or remove it
       // from the stack
       if (node->m_neighbors.size()) {
-        auto next = *node->m_neighbors.begin();
-        node->m_neighbors.erase(next);
+        auto next = node->m_neighbors.back();
+        node->m_neighbors.pop_back();
         // std::cout << "next " << next->m_val << " " << std::endl;
 
         if (in_chain.count(next)) {

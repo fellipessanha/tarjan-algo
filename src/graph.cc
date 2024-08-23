@@ -22,7 +22,7 @@ populate_nodes_randomly(int node_count, int edge_count) {
     if (edges.count(edge))
       continue;
 
-    nodes[a]->m_neighbors.insert(nodes[b]);
+    nodes[a]->m_neighbors.push_back(nodes[b]);
     edges.insert(edge);
   }
   return nodes;
@@ -48,7 +48,7 @@ generate_simple_cycled_graph() {
   }
 
   for (auto i = 0; i < 3; i++) {
-    ans[i]->m_neighbors.insert(ans[(i + 1) % 3]);
+    ans[i]->m_neighbors.push_back(ans[(i + 1) % 3]);
   }
 
   return ans;
