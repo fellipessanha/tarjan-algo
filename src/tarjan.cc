@@ -14,10 +14,11 @@ set_strongly_connected_componenets_index(
   std::unordered_map<std::shared_ptr<Node>, int>& node_idxs,
   std::stack<std::shared_ptr<Node>> chain,
   const std::shared_ptr<Node>& node) {
-  auto last = chain.top();
-  chain.pop();
+  auto last = node;
+
   while (chain.top() != node) {
-    node_idxs[chain.top()] = std::min(node_idxs[chain.top()], node_idxs[last]);
+    node_idxs[last] = std::min(node_idxs[chain.top()], node_idxs[last]);
+    node_idxs[chain.top()] = node_idxs[last];
     last = chain.top();
     chain.pop();
   }
@@ -49,7 +50,6 @@ find_strongly_connected_components(std::vector<std::shared_ptr<Node>> nodes) {
     // repeat until the stack is empty:
     while (chain.size()) {
       auto node = chain.top();
-      std::cout << node->m_val << " " << node->m_neighbors.size() << std::endl;
 
       // if the node is unvisited, mark node_idxs[n] as idx, increase idx
       if (node_idxs[node] == -1) {

@@ -6,6 +6,7 @@
 
 #include "graph.hh"
 #include "node.hh"
+#include "tarjan.hh"
 
 void
 output_edges(std::vector<std::shared_ptr<Node>>& nodes) {
@@ -21,11 +22,17 @@ output_nodes(std::vector<std::shared_ptr<Node>>& nodes) {
 }
 
 int
-main() {
-  auto nodes = populate_nodes_randomly(23, 30);
+main(int argc, char* argv[]) {
+  auto nodes = generate_simple_cycled_graph();
 
   output_edges(nodes);
   output_nodes(nodes);
+
+  auto tarj = find_strongly_connected_components(nodes);
+  std::cout << "tarjan output:\n";
+  for (auto [n, i] : tarj) {
+    std::cout << n->m_val << " " << i << std::endl;
+  }
 
   return 0;
 }
