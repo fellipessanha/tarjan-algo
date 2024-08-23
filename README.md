@@ -5,14 +5,16 @@ A [strongly connected component](https://en.wikipedia.org/wiki/Strongly_connecte
 ```mermaid
 graph LR;
   subgraph strongly connected component
-    1 --> 2;
-    2 --> 3;
-    3 --> 1;
+    a --> b;
+    b --> c;
+    c --> a;
   end
 
-  0 --> 1;
+  z --> b;
 ```
+
+the algorithm aims to identify these cycles, and returns a vector with pointers representing each cycle. In the example above, the program would return `{&a, &b, &c}`.
 
 ## todo:
 1. benchmark
-2. write a brief explanation based on the comments in [the implementation code](src/tarjan.cc)
+2. write a brief explanation of the algorithm itself based on the comments in [the implementation code](src/tarjan.cc)
