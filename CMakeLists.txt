@@ -9,6 +9,7 @@ set(SOURCES
     src/graph.cc
     src/node.cc
     src/util.cc
+    src/tarjan.cc
 )
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
