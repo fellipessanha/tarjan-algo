@@ -23,7 +23,9 @@ output_nodes(std::vector<std::shared_ptr<Node>>& nodes) {
 
 int
 main(int argc, char* argv[]) {
-  auto nodes = generate_simple_cycled_graph();
+  int node_count = argc >= 2 ? std::stoi(argv[1]) : 10;
+  int edge_count = argc == 3 ? std::stoi(argv[2]) : 6;
+  auto nodes = populate_nodes_randomly(node_count, edge_count);
 
   output_edges(nodes);
   output_nodes(nodes);
