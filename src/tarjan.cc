@@ -15,13 +15,16 @@ set_strongly_connected_componenets_index(
   std::stack<std::shared_ptr<Node>> chain,
   const std::shared_ptr<Node>& node) {
   auto last = node;
+  std::cout << "found a cycle: " << node->m_val << " ";
 
   while (chain.top() != node) {
+    std::cout << chain.top()->m_val << " ";
     node_idxs[last] = std::min(node_idxs[chain.top()], node_idxs[last]);
     node_idxs[chain.top()] = node_idxs[last];
     last = chain.top();
     chain.pop();
   }
+  std::cout << std::endl;
 }
 
 // std::vector<std::vector<std::shared_ptr<Node*>>>
@@ -33,8 +36,6 @@ find_strongly_connected_components(std::vector<std::shared_ptr<Node>> nodes) {
     node_idxs[n] = -1;
     unvisited.insert(n);
   }
-
-  // std::cout << "unvisited " << unvisited.size() << std::endl;
 
   int idx = 0;
   // iterate on nodes while not every node has been visited
@@ -50,6 +51,9 @@ find_strongly_connected_components(std::vector<std::shared_ptr<Node>> nodes) {
     // repeat until the stack is empty:
     while (chain.size()) {
       auto node = chain.top();
+      // std::cout << "node " << node->m_val << " has " <<
+      // node->m_neighbors.size()
+      //           << " friends" << std::endl;
 
       // if the node is unvisited, mark node_idxs[n] as idx, increase idx
       if (node_idxs[node] == -1) {
@@ -64,13 +68,14 @@ find_strongly_connected_components(std::vector<std::shared_ptr<Node>> nodes) {
         node->m_neighbors.erase(next);
         // std::cout << "next " << next->m_val << " " << std::endl;
 
-        if (node_idxs[next] != -1) {
+        if (in_chain.count(next)) {
           set_strongly_connected_componenets_index(node_idxs, chain, next);
         } else {
           chain.push(next);
           in_chain.insert(next);
         }
       } else {
+        in_chain.erase(chain.top());
         chain.pop();
       }
     }
